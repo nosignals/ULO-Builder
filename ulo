@@ -573,6 +573,7 @@ done
 wait
 cleaning 0
 chmod -R 777 $out
+pigz -qf $out/$device/Openwrt-$device-$kernel.img || gzip $out/$device/Openwrt-$device-$kernel.img
 clear
 echo -e '\n\n\n\n\n\n\n\n\n'
 echo "                                   Selesai"  | $lolcat -a -d 1
