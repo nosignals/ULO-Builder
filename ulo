@@ -7,6 +7,7 @@
 lolcat=/usr/games/lolcat
 echo -e "Preparing install ulo dependies" 
 apt install lolcat &> /dev/null
+clear
 
 tmp="./tmp"
 out="./out"
@@ -449,6 +450,7 @@ device_path="./device"
 kernel_path="./core/kernel"
 rootfs_path="./openwrt"
 
+clear
 echo -e "
 ======================================================================
 ----------------------------------------------------------------------
@@ -548,6 +550,7 @@ done
 [ "$kernel" ] || choose_kernel
 [ "$rootsize" ] || set_rootsize
 
+clear
 Total_size="$((128+$rootsize))"
 echo -e "\n\n\n\n\n\n\n\n\n
 ${green}                              Building Firmwares${normal}\n
@@ -571,7 +574,8 @@ wait
 cleaning 0
 chmod -R 777 $out
 pigz -qf $out/$device/Openwrt-$device-$kernel.img || gzip $out/$device/Openwrt-$device-$kernel.img
+clear
 echo -e '\n\n\n\n\n\n\n\n\n'
 echo "                                   Selesai"  | $lolcat -a -d 1
 echo "           Output file : out/$device/Openwrt-$device-$kernel.img" | $lolcat -a -d 30
-
+clear
