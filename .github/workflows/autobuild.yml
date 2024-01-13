@@ -16,7 +16,7 @@ jobs:
       matrix:
         kernel: [4.9.337, 6.1.66, 6.6.6]
         devices: [s905x, s905x2, s905x3, s905x4]
-    name: Build IPK Files
+    name: ULO Autobuilder
     runs-on: ubuntu-latest
     steps:
       
@@ -41,11 +41,26 @@ jobs:
           
       - name: Creating Package Artifact
         run: |
-          mkdir -p ./artifact/output/${{ matrix.devices }}
-          cp -rf ./out/${{ matrix.devices }} ./artifact
+          mkdir -p ./artifact
+          cp -rf ./out/${{ matrix.devices }}/* ./artifact/
           
       - name: Delivering Package
         uses: actions/upload-artifact@v2
         with:
           name: openwrt_package
-          path: ./artifact
+          path: ./artifact/*
+
+      - name: Upload release asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./artifact/*
+          tag: ${{ github.ref }}
+          file_glob: true
+          body: |
+            ## OpenWRT Release
+            Kernel :
+            - 4.9.337
+            - 6.6.6
+            - 6.1.66
+         
