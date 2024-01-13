@@ -55,6 +55,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./artifact/*
+          overwrite: true
           tag: ${{ github.ref }}
           file_glob: true
           body: |
